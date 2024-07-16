@@ -18,10 +18,10 @@ export class AuthorComponent implements OnInit, OnChanges {
     if (this.inAuthor) {
       this.isUpdate = true;
       this.currentVal = changes['inAuthor'].currentValue;
-      if(this.currentVal) {
+      if (this.currentVal) {
         this.name!.setValue(this.currentVal.name);
         this.email!.setValue(this.currentVal.email);
-        if(this.currentVal.birthday != null) {
+        if (this.currentVal.birthday != null) {
           this.birthday!.setValue(this.currentVal.birthday);
         }
       }
@@ -42,13 +42,13 @@ export class AuthorComponent implements OnInit, OnChanges {
     try {
       this.isUpdate = false;
       this.authorPostService.idsSeqState().subscribe((res) => {
-        if(res) {
+        if (res) {
           this.authorPostService.fetchIdsSeq().subscribe(data => {
             this.idsSeqList = data;
           });
         }
       });
-    } catch(err) {
+    } catch (err) {
       throw new Error(`Error: ${err}`);
     }
 
@@ -59,6 +59,7 @@ export class AuthorComponent implements OnInit, OnChanges {
     });
 
   }
+
   // Private functions
   /**
    * Get the author name from the form
@@ -66,12 +67,14 @@ export class AuthorComponent implements OnInit, OnChanges {
   get name() {
     return this.authorForm.get("name");
   }
+
   /**
    * Get the author email from the form
    */
   get email() {
     return this.authorForm.get("email");
   }
+
   /**
    * Get the author birthday from the form
    */
@@ -84,11 +87,11 @@ export class AuthorComponent implements OnInit, OnChanges {
    */
   async onSubmit() {
     let authorId: number = -1;
-    if(this.isUpdate) {
+    if (this.isUpdate) {
       authorId = this.currentVal.id;
     } else {
       const author = this.idsSeqList.filter(x => x.name === "category")[0];
-      if(author) {
+      if (author) {
         authorId = author.seq + 1;
       }
     }
@@ -96,7 +99,7 @@ export class AuthorComponent implements OnInit, OnChanges {
     outAuthor.id = authorId;
     outAuthor.name = this.name!.value;
     outAuthor.email = this.email!.value;
-    if(this.birthday!.value) {
+    if (this.birthday!.value) {
       outAuthor.birthday = this.birthday!.value;
     }
     this.outAuthorEvent.emit(outAuthor);

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLiteService } from './sqlite.service';
-//import UserDataSource from '../data-sources/UserDataSource';
 import AuthorDataSource from '../data-sources/AuthorDataSource';
 import { AuthorPostService } from './author-post.service';
-import { DataSource, Migration, MigrationInterface } from 'typeorm';
 
 @Injectable()
 export class OrmService {

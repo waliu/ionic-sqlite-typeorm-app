@@ -18,17 +18,18 @@ export function initializeFactory(init: SQLiteService) {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), CategoryComponentModule , AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), CategoryComponentModule, AppRoutingModule],
   providers: [SQLiteService, OrmService, AuthorPostService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-      {
-        provide: APP_INITIALIZER,
-        useFactory: initializeFactory,
-        deps: [SQLiteService],
-        multi: true
-      },
-   ],
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeFactory,
+      deps: [SQLiteService],
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+}
